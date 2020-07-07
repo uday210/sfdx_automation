@@ -1,0 +1,23 @@
+name: 'sfdx create pull request'
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2              
+      - name: Write the token into a file
+        run: 'echo ${{ secrets.DEVHUB_TOKEN}} > token.txt'
+      - name: Install Salesforce CLI
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+          mkdir sfdx-cli
+          tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+          ./sfdx-cli/install
+      - name: Auth with the DevHub for pull request
+        run: 'sfdx force:auth:sfdxurl:store -f token.txt -a DevHub -d'
+      - name: List orgs
+        run: 'sfdx force:org:list'
