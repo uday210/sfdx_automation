@@ -21,3 +21,5 @@ jobs:
         run: 'sfdx force:auth:sfdxurl:store -f token.txt -a DevHub -d'
       - name: List orgs
         run: 'sfdx force:org:list'
+      - name: Deploy source
+        run: node_modules/sfdx-cli/bin/run force:source:push -u uday_sfdc@dealreg.com 
