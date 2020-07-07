@@ -22,4 +22,4 @@ jobs:
       - name: List orgs
         run: 'sfdx force:org:list'
       - name: Deploy source
-        run: node_modules/sfdx-cli/bin/run force:source:push -u uday_sfdc@dealreg.com 
+        run: 'sfdx force:source:push -u uday_sfdc@dealreg.com '
