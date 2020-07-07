@@ -1,0 +1,15 @@
+<template>
+    <div class="action_buttons" style="padding: 5%;">
+    <template if:true={displayDelete}>
+        <!--  <lightning-button variant="brand" label="add New" onclick={addrow}></lightning-button>-->
+          <lightning-button-icon  icon-name="utility:delete"  alternative-text="Settings" onclick={deleterow}></lightning-button-icon>
+  
+    </template>
+    &nbsp;&nbsp;
+    <template if:true={displayshow}>
+      <!--  <lightning-button variant="brand" label="add New" onclick={addrow}></lightning-button>-->
+        <lightning-button-icon  icon-name="utility:add"  alternative-text="Settings" onclick={addrow}></lightning-button-icon>
+
+    </template>
+</div>
+</template>

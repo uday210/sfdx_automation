@@ -1,0 +1,6 @@
+<aura:component implements="force:lightningQuickAction,flexipage:availableForRecordHome,force:hasRecordId" access="global" > 
+    Hi3
+    <lightning:container src="{!$Resource.helloapp + '/helloapp/index.html'}" 
+            onmessage="{!c.handleMessage}" 
+            onerror="{!c.handleError}"/>
+</aura:component>

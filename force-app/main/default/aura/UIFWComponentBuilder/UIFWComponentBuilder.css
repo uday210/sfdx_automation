@@ -1,0 +1,41 @@
+/**
+ * Created by x213555 on 5/15/19.
+ */
+.THIS .icon-lightblue svg{
+    fill: rgb(0, 110, 217) !important;
+}
+
+.THIS.headerCard{
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+
+.THIS .headerRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.THIS .headerBow .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex:1;
+}
+
+.THIS .headerRow .templateName {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    justify-content: center;
+}
+
+.THIS .buttonIconBackgroundWhite{
+    background-color:white;
+}
+
+.THIS .field{
+    display: inline-block;
+}

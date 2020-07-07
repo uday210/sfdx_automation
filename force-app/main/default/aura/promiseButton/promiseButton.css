@@ -1,0 +1,8 @@
+.THIS .rounded {
+    border-radius: .25em .25em .25em .25em;
+}
+.THIS .nowrap {
+    white-space:nowrap;
+    margin-left:5px;
+    margin-right:5px;
+}

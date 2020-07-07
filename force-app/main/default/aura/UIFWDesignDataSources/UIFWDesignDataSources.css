@@ -1,0 +1,42 @@
+/**
+ * Created by x213555 on 8/27/19.
+ */
+/**
+ * Created by x213555 on 8/21/19.
+ */
+.THIS.flexRow{
+    background-color: #F5F9FC;
+    border-radius: .25rem;
+    border: 1px solid #e7e7e7;
+    padding: 5px;
+    margin:10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.THIS .flexItemEnd {
+    flex: 1;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.THIS.expandRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:15px;
+    margin-bottom:10px;
+    overflow: hidden;
+}
+
+.THIS .bar {
+    z-index: 2;
+    flex: 1;
+    height: 2px;
+    margin: 5px;
+    background-color: white;
+}

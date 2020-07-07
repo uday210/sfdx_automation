@@ -1,0 +1,29 @@
+<!--
+ - Created by x213555 on 5/24/19.
+ -->
+
+<aura:component description="UIFWTemplateBuilder">
+    <aura:attribute name="componentJSON" type="Object"/>
+    <aura:attribute name="flicker" type="Boolean" default="{!true}"/>
+   <!-- <c:globalStorageBroker callingComp="{!this}"/>-->
+
+    <aura:handler event="c:RefreshParentEvent" name="refresh" action="{!c.flicker}"/>
+
+    <lightning:layout class="builderItem">
+        <lightning:layoutItem  class="builderItem" flexibility="no-flex">
+                <c:UIFWComponentSelector/>
+        </lightning:layoutItem>
+        <lightning:layoutItem class="builderItem" flexibility="auto">
+            <div style="overflow-y: auto; height: 100%">
+                <aura:if isTrue="{!v.flicker}">
+                    <c:UIFWComponentBuilder
+                            componentJSON="{!v.componentJSON}"
+                    />
+                </aura:if>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem  class="builderItem" flexibility="no-flex">
+                <c:UIFWDesignAttributeEditor componentJSON="{!v.componentJSON}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

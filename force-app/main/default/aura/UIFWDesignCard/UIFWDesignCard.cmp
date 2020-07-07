@@ -1,0 +1,34 @@
+<!--
+ - Created by x213555 on 6/17/19.
+ -->
+
+<aura:component description="UIFWDesignCard">
+    <aura:attribute name="item" type="Object"/>
+
+    <c:UIFWDesignTargetHelper aura:id="targetHelper" targetField="{!v.item._targeted}"/>
+
+    <div class="slds-card cardBorder">
+        <div class="wrapper">
+            <div class="{!'title-row forward ' + (v.item._targeted?'targeted':'')}"
+                onclick="{!c.target}">
+                <div class="slds-card__header-title item" style="white-space: nowrap;">
+                    <aura:if isTrue="{!v.item.iconName}">
+                        <lightning:icon iconName="{!v.item.iconName}"
+                                        size="small" class="slds-m-right_small"/>
+                    </aura:if>
+                    {!v.item.name?v.item.name:'New Card'}
+                </div>
+                <div class="spacer"/>
+                <div class="item background-transparent">
+                    <lightning:buttonIcon iconName="utility:settings" class="iconBackgroundWhite"/>
+                </div>
+            </div>
+            <div class="wrapperInternal"/>
+            <div class="slds-card__body forward">
+                <c:UIFWDesignItemsRenderer items="{!v.item.items}">
+                    <c:UIFWDesignAnchorPoint items="{!v.item.items}"/>
+                </c:UIFWDesignItemsRenderer>
+            </div>
+        </div>
+    </div>
+</aura:component>

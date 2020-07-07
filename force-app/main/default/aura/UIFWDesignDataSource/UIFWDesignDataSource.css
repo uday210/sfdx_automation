@@ -1,0 +1,10 @@
+/**
+ * Created by x213555 on 8/28/19.
+ */
+
+.THIS.flexItem {
+    flex: 1;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,42 @@
+<aura:component controller="TabsController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="tabs" type="Object"/>
+    <aura:attribute name="activeSections" type="List"  />
+    <aura:attribute name="renderTabs" type="boolean" default="false"  />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <lightning:workspaceAPI aura:id="workspace"/>
+
+    <aura:if isTrue="{!v.renderTabs}">
+    <lightning:card >
+   <!--  
+   	 	<lightning:accordion aura:id="accordion"  activeSectionName="{!v.activeSections}"   allowMultipleSectionsOpen="true">
+   			<aura:iteration items="{!v.tabs}" var="eachMainTab">
+        		<lightning:accordionSection name="{!eachMainTab.Label}" label="{!eachMainTab.Label}" >
+                	<aura:iteration items="{!eachMainTab.ChildTabs__r}" var="eachSubTab">
+                   		 <p style="padding-left: 6%;margin: 2%;cursor: pointer;">{!eachSubTab.Label}</p>
+                    </aura:iteration>
+        		</lightning:accordionSection>
+     		</aura:iteration>  
+    	</lightning:accordion>-->
+          		
+    
+  <ul class="slds-accordion">
+  <aura:iteration items="{!v.tabs}" var="eachMainTab">
+  <li class="slds-accordion__list-item">
+    <section class="slds-accordion__section slds-is-open">
+      <div class="slds-accordion__summary">
+        <h3 class="slds-accordion__summary-heading">
+            <span class="slds-accordion__summary-content" data-display="{!eachMainTab.Display__c}" title="{!eachMainTab.Label}" style="cursor: pointer;" onclick="{!c.openDisplay}"><a href="{!eachMainTab.Display__c}">{!eachMainTab.Label}</a></span>
+        </h3>
+      </div>
+      <div class="slds-accordion__content" >
+		<aura:iteration items="{!eachMainTab.ChildTabs__r}" var="eachSubTab">
+                   		 <p style="padding-left: 6%;margin: 2%;cursor: pointer;" data-display="{!eachSubTab.Display__c}" onclick="{!c.openDisplay}"><a href="{!eachSubTab.Display__c}">{!eachSubTab.Label}</a></p>
+                    </aura:iteration>
+	  </div>
+    </section>
+  </li>
+</aura:iteration>
+</ul>
+    </lightning:card>
+    </aura:if>     
+</aura:component>

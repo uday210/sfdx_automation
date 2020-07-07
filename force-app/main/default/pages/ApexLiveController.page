@@ -1,0 +1,4 @@
+<apex:page standardController="Account">
+ <!--<apex:liveController/>-->
+    <apex:detail subject="{!account.id}"/>
+</apex:page>

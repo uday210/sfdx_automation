@@ -1,0 +1,17 @@
+<!--
+ - Created by x213555 on 7/10/19.
+ -->
+
+<aura:component description="UIFWDesignItemsRenderer">
+    <aura:attribute name="items" type="Object"/>
+    <aura:attribute name="hasAnchor" type="Boolean"/>
+    <aura:attribute name="flicker" type="Boolean" default="{!true}"/>
+    <aura:handler event="c:RefreshParentEvent" name="refresh" action="{!c.flicker}"/>
+
+    <aura:if isTrue="{!v.flicker}">
+        <aura:iteration items="{!v.items}" var="item">
+       <!--     <c:UIFWDesignItemRenderer item="{!item}"/>-->
+        </aura:iteration>
+    </aura:if>
+    {!v.body}
+</aura:component>

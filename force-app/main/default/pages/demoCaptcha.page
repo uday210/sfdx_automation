@@ -1,0 +1,82 @@
+<apex:page >
+    <html>
+      <head>
+        <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+        <script type="text/javascript">
+          var verifyCallback = function(response) {
+           //   parent.postMessage("Unlock", "https://jadm.lightning.force.com");
+          };
+          var onloadCallback = function() {
+              grecaptcha.render('html_element', {
+                  'sitekey' : '6LeMKsAUAAAAAG9U1QJrNCkXDDXiLjimB4xuoksL',
+                  'callback' : verifyCallback,
+              });
+          };
+        </script>
+      </head>
+      <body>
+        <form action="?" method="POST">
+          <div id="html_element"></div>
+            <br/>
+            <input type="submit" value="Submit" style="display:none"/>
+        </form>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async="" defer="">
+        </script>
+        
+        
+         <script type="text/javascript">
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="../../soap/ajax/46.0/connection.js"
+          type="text/javascript"></script>
+
+  <div>
+   <p>Message To Send</p>
+   <input type="text" id="theMessage" />
+   <button onclick="publishMessage()">Send Message</button>
+   <br/>
+   <br/>
+   <p>Subscribe to Say What (must subscribe to receive messages)</p>
+   <button onclick="subscribeMC()">Subscribe</button>
+   <p>Unsubscribe from Say What</p>
+   <button onclick="unsubscribeMC()">Unsubscribe</button>
+   <br/>
+   <br/>
+   <p>Latest Received message:</p>
+   <textarea id="ReceivedMessage" rows="5" style="disabled:true;resize:none;width:100%;"/>
+   
+   <script>
+   var SAYWHATMC = "{!$MessageChannel.SayWhat__c}";
+   var subscriptionToMC;
+    
+    function publishMessage() {
+   const payload = {
+       sourceSystem: "VF",
+       messageToSend: document.getElementById('theMessage').value
+   };
+ 
+   sforce.one.publish(SAYWHATMC, payload);
+}
+function subscribeMC() {
+   if (!subscriptionToMC) {
+       subscriptionToMC = sforce.one.subscribe(SAYWHATMC, onMCPublished);
+   }
+}
+ 
+function unsubscribeMC() {
+   if (subscriptionToMC) {
+       sforce.one.unsubscribe(subscriptionToMC);
+       subscriptionToMC = null;
+   }
+}
+
+function onMCPublished(message) {
+   var textArea = document.querySelector("#ReceivedMessage");
+ 
+   textArea.innerHTML = message ? 'Message: ' + message.messageToSend + '. Sent From: ' + message.sourceSystem : 'no message payload';
+}
+   </script>
+</div>
+      </body>
+    </html>
+</apex:page>

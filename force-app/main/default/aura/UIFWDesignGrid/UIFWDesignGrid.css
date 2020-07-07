@@ -1,0 +1,85 @@
+/**
+ * Created by x213555 on 7/17/19.
+ */
+.THIS.borderLocation{
+    position: relative;
+}
+.THIS .hoverable {
+    cursor: pointer;
+}
+.THIS .hoverable:hover ~ .border{
+    border-color: cornflowerblue;
+}
+.THIS .border{
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: .25rem .25rem .25rem .25rem;
+    border: 1px solid transparent;
+}
+.THIS .border.targeted{
+    border-color: darkblue !important;
+}
+.THIS .forward{
+    position: relative;
+    z-index: 2;
+}
+.THIS .grid{
+    padding: 5px;
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-auto-columns: 1fr;
+}
+.THIS .number{
+    font-size: 1.2rem;
+    color: #5e5e5e;
+    flex: 0;
+    padding:2px;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width:0;
+}
+.THIS .number.forceCollapse{
+    max-width:0;
+}
+.THIS .number.collapse{
+    animation: collapse 500ms;
+    max-width: 0;
+}
+.THIS .number.shown{
+    max-width: 4em;
+}
+@keyframes collapse {
+    0% {
+        max-width: 4em;
+    }
+    100% {
+        max-width: 0;
+    }
+}
+.THIS .number.expand{
+    max-width: 4em;
+    animation: expand 1000ms;
+}
+@keyframes expand {
+    0% {
+        max-width: 0;
+    }
+    100% {
+        max-width: 4em;
+    }
+}
+.THIS .smallCard{
+    display: flex;
+    background-color: white;
+    border-radius: .25rem;
+    border: 1px solid #e7e7e7;
+    min-height: 66px;
+    flex-direction: row;
+}

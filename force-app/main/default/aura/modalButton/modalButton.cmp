@@ -1,0 +1,30 @@
+<!--
+ - Created by x213555 on 5/16/19.
+ -->
+
+<aura:component description="modalButton">
+    <aura:attribute name="callingComp" type="Object"/>
+    <aura:attribute name="type" type="String" default="button"/>
+    <aura:attribute name="label" type="String" default="open"/>
+    <aura:attribute name="iconName" type="String" default="utility:edit"/>
+    <aura:attribute name="target" type="String"/>
+    <aura:attribute name="size" type="String"/>
+    <aura:attribute name="class" type="String"/>
+    <aura:attribute name="disabled" type="Boolean"/>
+
+    <aura:if isTrue="{!v.type=='button'}">
+        <lightning:button label="{!v.label}" onclick="{!c.openModal}" class="{!v.class}" disabled="{!v.disabled}" iconName="{!v.iconName}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.type=='buttonIcon'}">
+        <lightning:buttonIcon iconName="{!v.iconName}" alternativeText="{!v.iconName}" onclick="{!c.openModal}" size="{!v.size}" class="{!v.class}" disabled="{!v.disabled}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.type=='largeIcon'}">
+        <span onclick="{!c.openModal}">
+            <lightning:icon iconName="{!v.iconName}"
+                            alternativeText="{!v.label}"/>
+            <div style="color: white; text-align: center;">
+                {!v.label}
+            </div>
+        </span>
+    </aura:if>
+</aura:component>

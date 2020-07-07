@@ -1,0 +1,27 @@
+<!--
+ - Created by X227209 on 5/28/2019.
+ -->
+<aura:component controller="UIFWDataServiceController" description="UIFWCreateTemplate">
+        <aura:handler name="init" value="{!this}" action="{!c.initialize}"/>
+        <aura:registerEvent name="createTemplateEvent" type="c:UIFWTemplateEvent"/>
+        <aura:attribute name="templateName" type="String"  access="private" />
+        <aura:attribute name="templateExists" type="boolean" default="false" />
+        <c:apexErrorHandler aura:id="errorHandler" parentCompType="UIFWCreateTemplate"/>
+        <ltng:require scripts="{!join(',',
+        $Resource.uifwUtil)}" afterScriptsLoaded="{!c.uifwJSLibraryLoaded}"/>
+
+        <div style="height:160px">
+            <!-- Empty space to adjust look and feel -->
+            <div style="height:24px">
+            </div>
+                <lightning:input aura:id="templateId" label="Enter Template Name" pattern ="^[a-zA-Z0-9_ ]*$" messageWhenPatternMismatch ="No special characters allowed"  value="{!v.templateName}" required="true"/>
+                <aura:if isTrue="{!v.templateExists}">
+                    <div class="slds-text-color_destructive">Template already exists</div>
+                </aura:if>
+        </div>
+        <hr style="margin:0"/>
+        <div class="slds-align_absolute-center">
+            <ui:button label="Submit" press="{!c.createTemplate}" class="slds-m-top_medium slds-button slds-button_brand" />
+            <ui:button label="Cancel" press="{!c.closeModal}" class="slds-m-top_medium slds-button slds-button_brand" />
+        </div>
+</aura:component>

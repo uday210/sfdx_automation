@@ -1,0 +1,15 @@
+<!--
+ - Created by x213555 on 6/17/19.
+ -->
+
+<aura:component description="UIFWDesignIcon">
+    <aura:attribute name="type" type="String"/>
+    <aura:attribute name="iconName" type="String"/>
+    <aura:attribute name="displayName" type="String"/>
+    <aura:attribute name="showLabel" type="Boolean"/>
+    <ltng:require scripts="{!$Resource.uifwComponents}" afterScriptsLoaded="{!c.onInit}"/>
+    <lightning:icon class="inline-icon" iconName="{!v.iconName}" title="{!v.displayName}" alternativeText="{!v.displayName}"/>&nbsp;
+    <aura:if isTrue="{!v.showLabel}">
+        {!v.displayName}
+    </aura:if>
+</aura:component>

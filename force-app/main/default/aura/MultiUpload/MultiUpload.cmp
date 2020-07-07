@@ -1,0 +1,136 @@
+<aura:component controller="BulkImageUploader">
+    <aura:attribute
+                    name="myRecordId"
+                    type="String"
+                    description="Record to which the files should be attached"
+                    />
+    <aura:attribute name="isOpen" type="boolean" default="false" />
+    <aura:attribute name="uploadedFiles" type="Object" />
+    <aura:attribute name="currentRecordId" type="Object" />
+    
+    <lightning:tabset selectedTabId="one">
+        <lightning:tab label="Upload Files" id="one">
+            <lightning:fileUpload
+                                  label="Upload Files"
+                                  name="fileUploader"
+                                  multiple="true"
+                                  accept=".jpg, .png"
+                                  recordId="0586F000000l5Ma"
+                                  onuploadfinished="{!c.handleUploadFinished}"
+                                  />
+            <div class="slds-grid slds-wrap">
+            <aura:iteration items="{!v.uploadedFiles}" var="eachItem">
+                 <div class="slds-col slds-size_1-of-3">
+				<lightning:card title="">
+                    <aura:set attribute="actions">
+                        <span
+                              onclick="{! c.doDelete }"
+                              style="cursor:pointer"
+                              data-currentid="{!eachItem.documentId}"
+                              >
+                            <lightning:icon
+                                            iconName="action:close"
+                                            alternativeText="Settings"
+                                            size="xx-small"
+                                            />
+                        </span>
+                        <span
+                              onclick="{! c.doCustomize }"
+                              style="cursor:pointer"
+                              data-currentid="{!eachItem.documentId}"
+                              >
+                            &nbsp;
+                            <lightning:icon
+                                            iconName="action:edit"
+                                            alternativeText="Settings"
+                                            size="xx-small"
+                                            />
+                        </span>
+                    </aura:set>
+                    <p class="slds-p-horizontal_small">
+                        <lightning:fileCard
+                                            fileId="{!eachItem.documentId}"
+                                            description="{!eachItem.name}"
+                                            />
+                    </p>
+                </lightning:card>
+				</div>
+            </aura:iteration>
+            </div>
+            <!--Use "slds-m-around_xx-large" class to add standard X-Large padding to the component-->
+            <div class="slds-m-around_xx-large">
+                <aura:if isTrue="{!v.isOpen}">
+                    <!--###### MODAL BOX Start######-->
+                    <section
+                             role="dialog"
+                             tabindex="-1"
+                             aria-labelledby="modal-heading-01"
+                             aria-modal="true"
+                             aria-describedby="modal-content-id-1"
+                             class="slds-modal slds-fade-in-open"
+                             >
+                        <div
+                             class="slds-modal__container"
+                             style="    margin: 0 auto;
+                                    width: 90%;
+                                    max-width: 90%;
+                                    min-width: 20rem;"
+                             >
+                            <!-- ###### MODAL BOX HEADER Start ######-->
+                            <header class="slds-modal__header">
+                                <lightning:buttonIcon
+                                                      iconName="utility:close"
+                                                      onclick="{! c.closeModel }"
+                                                      alternativeText="close"
+                                                      variant="bare-inverse"
+                                                      class="slds-modal__close"
+                                                      />
+                            </header>
+                            <!--###### MODAL BOX BODY Part Start######-->
+                            <div class="slds-modal__content " id="modal-content-id-1">
+                                <iframe
+                                        src="{!'/apex/Image_Editor?Id='+v.currentRecordId}"
+                                        height="400px"
+                                        width="100%"
+                                        />
+                            </div>
+                            <!--###### MODAL BOX FOOTER Part Start ######-->
+                            <footer class="slds-modal__footer">
+                                <lightning:button
+                                                  variant="neutral"
+                                                  label="Cancel"
+                                                  title="Cancel"
+                                                  onclick="{! c.closeModel }"
+                                                  />
+                            </footer>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                    <!--###### MODAL BOX Part END Here ######-->
+                </aura:if>
+            </div>
+        </lightning:tab>
+        <lightning:tab label="Map Files" id="two">
+                <aura:iteration items="{!v.uploadedFiles}" var="eachItem">
+
+            <lightning:recordEditForm objectApiName="ContentVersion" aura:id="formData" >
+                <!-- the messages component is for error messages -->
+                <lightning:messages />
+                
+                   <tr><td  data-id="{!eachItem.documentId}">
+                    {!eachItem.name}
+                    </td><td data-id="{!eachItem.documentId}">
+                    <lightning:inputField
+                                          fieldName="Account__c"
+                                         recodId="0686F00000LP4oqQAD"
+                                        
+                                          />
+                      </td> </tr> 
+               
+                <br />
+            </lightning:recordEditForm>
+                     </aura:iteration>
+            <lightning:button name="save" onclick="{!c.doSave}"/>
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

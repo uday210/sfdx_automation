@@ -1,0 +1,11 @@
+<!--
+ - Created by x213555 on 7/3/18.
+ -->
+
+<aura:component description="promiseHelper">
+    <aura:method name="call" action="{!c.callAsPromise}">
+        <aura:attribute name="callInfo" type="Object" required="true"/>
+    </aura:method>
+    <aura:method name="createExternalPromise" action="{!c.createExternalPromise}"/>
+    <aura:method name="createResolvedPromise" action="{!c.createResolvedPromise}"/>
+</aura:component>

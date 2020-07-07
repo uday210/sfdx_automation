@@ -1,0 +1,37 @@
+<!--
+ - Created by x213555 on 8/28/19.
+ -->
+
+<aura:component description="UIFWDesignDataSource">
+
+
+    <aura:registerEvent name="load" type="c:UIFWDesignVariableLoadEvent"/>
+
+    <aura:attribute name="item" type="Object" default="{}"/>
+    <aura:attribute name="dataSourceTypeList" type="List" default="[
+        {label: 'api', value:'api'},
+        {label:'broker', value:'broker'}
+    ]" access="private"/>
+
+    <aura:attribute name="flicker" type="Boolean" default="false"/>
+    <aura:attribute name="allowedBrokers" type="Object"/>
+
+    <aura:attribute name="allowedUIFWVariables" type="Object"/>
+    <aura:attribute name="uifwScopedVariableSample" type="Object"/>
+
+    <aura:attribute name="selectArray" type="Boolean" default="{!false}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+ <!--   <c:globalStorageBroker aura:id="globalStorage" callingComp="{!this}"/>-->
+    <c:apexErrorHandler callingComp="{!this}" parentCompType="UIFWDesignDataSelector"/>
+
+ <!--   <c:UIFWDesignAPIModal aura:id="apiConfigModal"
+                          selectedAPI="{!v.item.dataSourceName}"/>-->
+
+    <!--Purely descriptive accountBroker, expecting no real values-->
+<!--    <c:accountBroker aura:id="accountBroker"
+                     callingComp="{!this}"
+                     recordId="_"/>-->
+
+</aura:component>

@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="accept" type="List" default="['.pdf', '.jpeg']"/>
+    <aura:attribute name="multiple" type="Boolean" default="true"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+
+    <lightning:fileUpload  name="fileUploader"
+                           label= "Demo Upload"
+                           multiple="false"
+                           accept="{!v.accept}"
+                           recordId="0066F00000tiqVoQAI"/>
+    
+        <lightning:fileCard fileId="0696F0000090BwT" description="Sample Description"/>
+
+
+</aura:component>

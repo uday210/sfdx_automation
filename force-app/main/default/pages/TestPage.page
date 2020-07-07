@@ -1,0 +1,5 @@
+<apex:page >
+      <apex:outputPanel rendered="{!if('a' != Null,True,False)}" layout="block">
+                                          HELLO
+                                                    </apex:outputPanel>
+</apex:page>

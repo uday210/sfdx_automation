@@ -1,0 +1,6 @@
+<!--
+ - Created by x213555 on 8/19/19.
+ -->
+
+<aura:event type="COMPONENT" description="UIFWDesignVariableLoadEvent">
+</aura:event>

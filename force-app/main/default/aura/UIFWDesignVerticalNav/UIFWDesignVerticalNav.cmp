@@ -1,0 +1,101 @@
+<!--
+ - Created by x213555 on 6/26/19.
+ -->
+
+<aura:component description="UIFWDesignVerticalNav">
+    <aura:attribute name="item" type="Object"/>
+    <aura:attribute name="hoverTimeout" type="Integer"/>
+    <aura:attribute name="flicker" type="Boolean" default="{!true}"/>
+
+    <aura:handler event="c:RefreshParentEvent" name="refresh" action="{!c.flicker}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <c:UIFWDesignTargetHelper aura:id="targetHelper" targetField="{!v.item._targeted}"/>
+   <!-- <c:globalStorageBroker callingComp="{!this}"/>-->
+    <c:UIFWDesignAnchorPoint aura:id="anchorPoint" display="false" items="{!v.item.items}"/>
+
+    <aura:if isTrue="{!v.flicker}">
+        <div class="slds-card borderLoc">
+            <div class="{!'hoverable '+(v.item._targeted==1?'targeted ':'')}" style="background-color: #e7e7e7; border-radius: .25rem .25rem 0 0; padding: 2px; padding-left:10px;" onclick="{!c.target}">
+                <c:UIFWDesignIcon type="{!v.item.type}"/>
+            </div>
+            <div class="border"/>
+            <div class="slds-card__body slds-m-around--medium forward">
+                <div class="flex-row">
+                    <div class="flex-item1">
+                        <nav class="slds-nav-vertical">
+                            <aura:iteration items="{!v.item.items}" var="item" indexVar="index">
+
+                                <aura:if isTrue="{!!globalStorage.changeUIFWDesignTarget}">
+                                    <div class="slds-nav-vertical__section" style="position: relative; display: inline-block; white-space: nowrap; width:100%;">
+                                        <ul aria-describedby="entity-header" style="width: 100%; white-space: nowrap; z-index: 2; position: relative;">
+                                            <!--Determine if section title is selected, hovered, or targeted-->
+                                            <li aura:id="itemTitle" class="{!'slds-nav-vertical__item ' +
+                                                    (mod(item._selected, 2)==1 ? 'slds-is-active ' : '') +
+                                                    ((item._targeted)?'selected ':((item._hovered)?'hovered ':''))}"
+                                                style="width:100%; display: inline-block;"
+                                                onclick="{!c.select}"
+                                                onmouseenter="{!c.changeHovered}"
+                                                onmouseleave="{!c.changeHovered}"
+                                                data-value="{!index}">
+                                                <a href="javascript:void(0);" class="slds-nav-vertical__action">
+                                                    <aura:if isTrue="{!item.iconName}">
+                                                        <!-- TBD for later alignment -->
+                                                        <!-- <div style="position: absolute; left:.5em; bottom: 0.75em;"> -->
+                                                            <lightning:icon iconName="{!item.iconName}"
+                                                                            size="x-small"
+                                                                            class="slds-m-right_x-small"/>
+                                                        <!-- </div> -->
+                                                    </aura:if>
+                                                    {!item.name?item.name:'New Section'}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <aura:if isTrue="{!or(item._targeted, and(mod(item._selected,2)==1, item._hovered))}">
+                                            <span aria-hidden="true" class="{!'slds-nav-vertical__action overhang ' +
+                                                ((item._targeted)?'selected ':((item._hovered)?'hovered ':''))}">
+                                                <!--filler text for spacing-->
+                                                M
+                                            </span>
+                                        </aura:if>
+                                    </div>
+                                </aura:if>
+                            </aura:iteration>
+                            <div class="slds-nav-vertical__section" style="position: relative; display: inline-block; white-space: nowrap; overflow: hidden;">
+                                <ul aria-describedby="entity-header" style="white-space: nowrap;">
+                                    <li class="slds-nav-vertical__item"
+                                        style="width:100%; display: inline-block;"
+                                        onclick="{!c.addItem}">
+                                        <a href="javascript:void(0);" class="slds-nav-vertical__action" style="color: #0075dd; margin-left: -.9em;">
+                                            + New Section
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="flex-item4">
+                        <aura:iteration items="{!v.item.items}" var="item" indexVar="index">
+                            <!--Determine if section is selected, hovered, or targeted and display if appropriate-->
+                            <div class="{!'wrapper ' +
+                                (!globalStorage.changeUIFWDesignTarget
+                                    ? (mod(item._selected, 2)==1 ? '' : 'slds-hide ') +
+                                        ((item._targeted)?'selected ':((item._hovered)?'hovered ':'')) +
+                                        (or(
+                                            v.item.items[0]._targeted,
+                                            and(
+                                                mod(v.item.items[0]._selected,2)==1,
+                                                v.item.items[0]._hovered
+                                            )
+                                        ) ?'squareTopLeftCorner ':'')
+                                    :'')}">
+                                <c:UIFWDesignTargetHelper aura:id="targetHelpers" targetField="{!item._targeted}" updates="false"/>
+                                <c:UIFWDesignItemRenderer item="{!item}"/>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

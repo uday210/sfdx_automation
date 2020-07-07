@@ -1,0 +1,45 @@
+<!--
+ - Created by x213555 on 7/17/19.
+ -->
+
+<aura:component description="UIFWDesignGrid">
+    <aura:attribute name="item" type="Object"/>
+    <aura:attribute name="gridLayout" type="String"/>
+
+    <c:UIFWDesignTargetHelper aura:id="targetHelper" targetField="{!v.item._targeted}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.checkCollapse}"/>
+    <aura:handler name="change" value="{!v.item._targeted}" action="{!c.checkCollapse}"/>
+
+    <div class="borderLocation slds-card" style="display: flex; flex-direction: column; width:100%;">
+        <div class="hoverable" onclick="{!c.target}" style="flex:0; border-radius: .25rem .25rem 0 0; background-color: #e7e7e7; padding: 5px;">
+            <c:UIFWDesignIcon type="{!v.item.type}"/>
+        </div>
+        <div class="{!'border ' + (v.item._targeted==1 ? 'targeted' : '')}"/>
+        <aura:if isTrue="{!v.gridLayout}">
+            <div class="grid" style="{!'grid-template-areas: '+ v.gridLayout +';'}">
+                <aura:iteration items="{!v.item.items}" var="item" indexVar="index">
+                    <div class="smallCard" style="{!'grid-area: loc'+(index+1)+';'}">
+                        <div class="{!'number ' +(v.item._targeted
+                                ? (v.item._hasBeenUntargeted
+                                    ? 'expand '
+                                    : 'shown ')
+                                : (lessthan(v.item._forceCollapse, 2)
+                                    ? 'collapse '
+                                    : 'forceCollapse ')
+                                )}">
+                            <span style="overflow: hidden; color: #5e5e5e;">{!index+1}.</span>
+                        </div>
+                        <c:UIFWDesignItemRenderer item="{!item}"/>
+                    </div>
+                </aura:iteration>
+            </div>
+            <aura:set attribute="else">
+                <div style="color: #5e5e5e; text-align: center; background-color: white; padding:15px; border-radius: 0 0 .25rem .25rem;">
+                    <p><i>Grid layout not yet configured, please configure grid layout.</i></p>
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

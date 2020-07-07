@@ -1,0 +1,64 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable" >
+
+    <ltng:require styles="{!$Resource.uifwCSS}"  afterScriptsLoaded="{!c.uifwJSLibraryLoaded}" />
+
+    <aura:attribute name="scriptLoaded" type="boolean" default="true" />
+    <aura:attribute name="showTemplateBuilder" type="boolean" default="false" />
+    <aura:attribute name="templateName" type="String"/>
+    <aura:attribute name="templateDesignFile" type="Object"/>
+    <aura:attribute name="modalPromise" type="Aura.Action" access="private"/>
+
+    <aura:handler name="editTemplateEvent" event="c:UIFWTemplateEvent" action="{!c.handleTemplateEvent}"/>
+    <aura:handler name="createTemplateEvent" event="c:UIFWTemplateEvent" action="{!c.handleTemplateEvent}"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib" />
+
+    <c:apexErrorHandler parentCompType="UIFWCanvas"/>
+
+    <c:UIFWEditTemplate aura:id="UIFWEditTemplate"/>
+
+    <div class="uifwcanvas">
+        <aura:if isTrue="{!v.scriptLoaded}">
+            <!-- Sidebar menu component -->
+            <!-- TODO: Control via UIFWSideBar component -->
+            <lightning:layout class="fill">
+                <lightning:layoutItem flexibility="no-flex">
+                    <div class="uifwsidebar">
+                        <ul>
+                            <li onclick="{!c.gotoHome}">
+                                <lightning:icon iconName="utility:home"
+                                                alternativeText="Create Template"/>
+                                <div class="uifwMenuText">
+                                    Home
+                                </div>
+                            </li>
+                            <li onclick="{!c.createNewTemplate}">
+                                <lightning:icon iconName="utility:insert_template"
+                                                alternativeText="Create Template"/>
+                                <div class="uifwMenuText">
+                                    New
+                                </div>
+                            </li>
+                            <li>
+                                <c:modalButton type="largeIcon"
+                                               label="Open"
+                                               iconName="utility:edit_form"
+                                               callingComp="{!this}"
+                                               target="UIFWEditTemplate"/>
+                            </li>
+                        </ul>
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto">
+                    <!-- Template Builder -->
+                    <aura:if isTrue="{!v.showTemplateBuilder}">
+                        <c:UIFWTemplateBuilder componentJSON="{!v.templateDesignFile}"/>
+                        <aura:set attribute="else">
+                            <c:UIFWWelcomeMessage/>
+                        </aura:set>
+                    </aura:if>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,27 @@
+<!--
+ - Created by x213555 on 6/4/19.
+ -->
+
+<aura:component description="UIFWDesignTargetHelper">
+    <aura:attribute name="targetField" type="Object"/>
+    <aura:attribute name="updates" type="Boolean" default="true"/>
+    <aura:method name="setTarget" action="{!c.setTarget}"/>
+    <aura:method name="clearTargets" action="{!c.clearTargets}"/>
+    <aura:method name="openSidebar" action="{!c.openSidebar}"/>
+    <aura:method name="closeSidebar" action="{!c.closeSidebar}"/>
+
+    <aura:attribute name="bind" type="Object"/>
+    <aura:attribute name="param" type="Object"/>
+
+ <!--   <c:globalStorageBroker callingComp="{!this}"/>-->
+  <!--  <aura:if isTrue="{!globalStorage.changeUIFWDesignTarget}">
+        <aura:if isTrue="{!and(v.targetField!=0, v.targetField!=null)}">
+            <aura:if isTrue="{!and(v.param, v.targetField==2)}">
+                <c:assignmentHelper value="{!v.bind}" to="{!v.param}"/>
+            </aura:if>
+            <aura:if isTrue="{!v.updates}">
+                <c:assignmentHelper value="{!v.targetField}" to="{!v.targetField-1}"/>
+            </aura:if>
+        </aura:if>
+    </aura:if>-->
+</aura:component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="designComponentLWCDemo">
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <!-- Configuring the design attributes --><targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="rows" type="Integer" default="1" label="Enter the Row count"/>
+            <property name="columns" type="Integer" default="1" label="Enter Column Count"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

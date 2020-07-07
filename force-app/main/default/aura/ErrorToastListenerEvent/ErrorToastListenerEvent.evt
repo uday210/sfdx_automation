@@ -1,0 +1,8 @@
+<!--
+ - Created by x213555 on 6/7/18.
+ -->
+
+<aura:event type="COMPONENT" description="ErrorToastListenerEvent">
+    <aura:attribute name="error" type="String"/>
+    <aura:attribute name="targetId" type="String"/>
+</aura:event>

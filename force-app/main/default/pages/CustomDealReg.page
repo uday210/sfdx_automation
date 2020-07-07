@@ -1,0 +1,17 @@
+<apex:page >
+<apex:slds />
+    <apex:includeLightning />
+
+    <div id="lightning" />
+
+    <script>
+        $Lightning.use("c:DealReg", function() {
+          $Lightning.createComponent("c:DealCreationComponentMain",
+          {},
+         "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+</apex:page>

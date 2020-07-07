@@ -1,0 +1,11 @@
+<aura:component description="TextEditor">
+    <aura:attribute name="otherData" type="String" />
+    <aura:attribute name="renderedEleId" type="String" />
+   <!-- <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <lightning:inputRichText value="{!v.myVal}" placeholder="Type something interesting"/>
+    <h1 class="slds-m-top_large slds-text-heading_medium">Output</h1>-->
+    <div aura:id="output" style="cursor:all-scroll;" class="slds-box editor slds-text-longform draggablesection" id="{!v.renderedEleId}">
+       
+        <lightning:formattedRichText value="{!v.otherData}" />
+    </div>
+</aura:component>

@@ -1,0 +1,13 @@
+/**
+ * Created by x213555 on 5/28/19.
+ */
+.THIS.builderItem{
+    height: 100%;
+}
+.THIS .builderItem{
+    height: 100%;
+}
+.THIS .slds-button__icon{
+    margin-left:-1px;
+    margin-top:-1px;
+}

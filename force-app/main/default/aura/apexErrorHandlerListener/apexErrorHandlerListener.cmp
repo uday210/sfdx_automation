@@ -1,0 +1,9 @@
+<!--
+ - Created by x213555 on 6/7/18.
+ -->
+
+<aura:component description="apexErrorHandlerListener">
+    <aura:handler event="c:ErrorToastEvent"  action="c.redirectErrorEvent"/>
+    <aura:registerEvent name="error" type="c:ErrorToastListenerEvent"/>
+
+</aura:component>

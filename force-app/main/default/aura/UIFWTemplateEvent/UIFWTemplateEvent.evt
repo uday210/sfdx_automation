@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT" description="UIFWTemplateEvent">
+    <aura:attribute name="action" type="String"/>
+    <aura:attribute name="templateName" type="String"/>
+    <aura:attribute name="templateAPIName" type="String"/>
+    <aura:attribute name="templateDesignFile" type="Object"/>
+</aura:event>

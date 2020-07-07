@@ -1,0 +1,97 @@
+<aura:component description="UIFWDesignVerticalTab">
+    <aura:attribute name="item" type="Object"/>
+    <aura:attribute name="flicker" type="Boolean" default="{!true}"/>
+    <aura:attribute name="hoverTimeout" type="Integer"/>
+
+    <aura:handler event="c:RefreshParentEvent" name="refresh" action="{!c.flicker}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <c:UIFWDesignTargetHelper aura:id="ownTargetHelper" targetField="{!v.item._targeted}"/>
+    <c:UIFWDesignAnchorPoint aura:id="anchorPoint" display="false" items="{!v.item.items}"/>
+ <!--   <c:globalStorageBroker callingComp="{!this}"/>
+-->
+    <div class="slds-card borderLoc">
+        <div class="{!'hoverable '+(v.item._targeted==1?'targeted ':'')}" style="background-color: #e7e7e7; border-radius: .25rem .25rem 0 0; padding: 2px; padding-left:10px;" onclick="{!c.target}">
+            <c:UIFWDesignIcon type="VerticalTab"/>
+        </div>
+        <div class="border"/>
+        <div class="slds-vertical-tabs" style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);">
+            <ul class="slds-vertical-tabs__nav higher">
+                <aura:iteration items="{!v.item.items}" var="item" indexVar="index">
+                    <li class="{!'smallPadding slds-vertical-tabs__nav-item ' + (mod(item._selected, 2)==1?'slds-is-active':'')}"
+                        title="{!item.name}">
+                        <div onclick="{!c.select}"
+                             data-value="{!index}"
+                             class="slds-vertical-tabs__link fullWidth">
+                            <aura:if isTrue="{!!globalStorage.changeUIFWDesignTarget}">
+                                <div aura:id="itemTitle" class="{!'fullWidth sectionTitle '+
+                                        (item._targeted?'targeted ':'untargeted ') +
+                                        (item._hovered?'hovered ':'') +
+                                        (mod(item._selected, 2)==1?'selected ':'unselected ')}"
+                                         onmouseenter="{!c.changeHovered}"
+                                         onmouseleave="{!c.changeHovered}"
+                                         data-value="{!index}">
+                                    <lightning:layoutItem flexibility="auto">
+                                        <div class="slds-truncate align-left" data-value="{!index}">
+                                            <div data-value="{!index}">
+                                                    <aura:if isTrue="{!item.iconName}" >
+                                                        <lightning:icon iconName="{!item.iconName}"
+                                                                        size="x-small"
+                                                                        class="slds-m-right_x-small"/>
+                                                    </aura:if>
+                                                    {!item.name?item.name:'New Section'}
+                                            </div>
+                                        </div>
+                                    </lightning:layoutItem>
+                                </div>
+                                <aura:if isTrue="{!or(item._targeted, and(mod(item._selected,2)==1, item._hovered))}">
+                                    <div class="selectedBorderFixer" aria-hidden="true">
+                                        <div class="{!'sectionTitle selected ' +
+                                                (item._targeted?'targeted ':'untargeted hovered ')}">
+                                            <span style="visibility: hidden">
+                                                Spacer Text
+                                            </span>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                            </aura:if>
+                        </div>
+                    </li>
+                </aura:iteration>
+                <li class="{!'slds-vertical-tabs__nav-item'}"
+                    title="Add New item">
+                    <a class="slds-vertical-tabs__link" onclick="{!c.addItem}" data-value="{!index}">
+                        <span class="slds-truncate" title="Add New item" data-value="{!index}">
+                                + New Section
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <aura:if isTrue="{!greaterthan(v.item.items.length, 0)}">
+                <aura:iteration items="{!v.item.items}" var="item" indexVar="index">
+                    <div class="{!'slds-vertical-tabs__content ' +
+                            ((mod(item._selected, 2)==1?'':'slds-hide'))
+                        }" style="margin-bottom:-1px;">
+                        <div class="{!'targetedBorder '+
+                            (!globalStorage.changeUIFWDesignTarget
+                                ? ((item._targeted)?'selected ':((item._hovered)?'hovered ':'')) +
+                                    (or(
+                                        v.item.items[0]._targeted,
+                                        and(
+                                            mod(v.item.items[0]._selected,2)==1,
+                                            v.item.items[0]._hovered
+                                        )
+                                    ) ? 'squareTopLeftCorner ' : '')
+                                : '')}">
+                            <c:UIFWDesignTargetHelper aura:id="targetHelper" updates="false" targetField="{!item._targeted}"/>
+                            <c:UIFWDesignItemRenderer item="{!item}"/>
+                        </div>
+                    </div>
+                </aura:iteration>
+                <aura:set attribute="else">
+                    <div class="slds-vertical-tabs__content"/>
+                </aura:set>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

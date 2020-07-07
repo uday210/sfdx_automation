@@ -1,0 +1,26 @@
+<apex:page >
+    <apex:includeLightning />
+    <!--Lightning Container-->
+    <div style="width:100%;height:100px;" id="LightningContainer" />
+      <script type="text/javascript">
+    //  var component; //Variable for Lightning Out Component
+    //Create Lightning Component
+    $Lightning.use("c:DynamicButton", function() {
+        $Lightning.createComponent("lightning:button", { 
+        "label":"test"
+        ,
+        "onclick": cmp.getReference("c.handlePress")},
+                                   "LightningContainer",
+                                   function(cmp) {
+                                       // component = cmp;
+                                       console.log('Component created');
+                                   });
+    });
+     
+    //Method to call Lightning Component Method
+    var getWelcomeMessage = function(){
+        component.welcomeMsgMethod({message : "Welcome to Salesforce Ohana", developerGroup: "Bengaluru"}, "Biswajeet Samal");
+    }
+    </script>
+     
+</apex:page>

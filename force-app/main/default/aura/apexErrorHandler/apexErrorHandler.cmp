@@ -1,0 +1,85 @@
+<aura:component description="apexErrorHandler" controller="ApexErrorHandler">
+    <ltng:require scripts="{!$Resource.jQuery3}" afterScriptsLoaded="c.scriptsLoaded"/>
+    <lightning:workspaceAPI aura:id="workspace" />
+
+    <aura:registerEvent name="errorToast" type="c:ErrorToastEvent"/>
+
+    <aura:attribute name="parentCompType" type="String" required="true"/>
+    <aura:attribute name="errors" type="Object"/>
+    <aura:attribute name="showAdditional" type="Boolean"/>
+    <aura:attribute name="isDefault" type="Boolean" default="false"/>
+    <aura:attribute name="hasCheckedDefault" type="Boolean" default="false"/>
+    <aura:attribute name="tabId" type="String" default=""/>
+    <aura:attribute name="callingComp" type="Object"/>
+    <aura:attribute name="pendingErrors" type="Object"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name="error" event="c:ErrorToastListenerEvent" action="{!c.addErrorToast}"/>
+    <aura:if isTrue="{!or(v.isDefault, greaterthan(v.errors.length, 0))}">
+        <c:apexErrorHandlerListener/>
+    </aura:if>
+
+    <aura:method name="handleError" action="{!c.logError}" access="global">
+        <aura:attribute name="errorObj" type="object" required="false"/>
+    </aura:method>
+    <aura:method name="displayError" action="{!c.showError}" access="global">
+        <aura:attribute name="errorObj" type="object" required="false"/>
+    </aura:method>
+    <aura:method name="displaySoftError" action="{!c.showSoftError}" access="global">
+        <aura:attribute name="errorObj" type="object" required="false"/>
+    </aura:method>
+
+
+    <span aura:id="handler" class="{!v.isDefault ? 'apexErrorHandler' : ''}" style="display: table;">
+        <aura:if isTrue="{!greaterthan(v.errors.length, 0)}">
+            <div class="errorPosition">
+                <div class="errorToast">
+                    <div class="background-red">
+                        <div>
+                            <div class="white" style="display: inline-block; font-size: 1.5em; font-weight: 500;">
+                                {!v.errors[0].title}
+                            </div>
+                            <div style="float: right; display: inline-block;">
+                                <lightning:buttonIcon iconClass="button-icon-white" alternativeText="close" iconName="utility:close" onclick="{!c.closeError}"/>
+                            </div>
+                        </div>
+                        <div class="white">
+                            {!v.errors[0].description}
+                        </div>
+                    </div>
+                </div>
+                <aura:if isTrue="{!greaterthan(v.errors.length, 1)}">
+                    <div class="errorToastLower">
+                        <h3 class="white" onclick="{!c.toggleShowAdditional}" style="font-size: .8em;">
+                            <aura:if isTrue="{!v.showAdditional}">
+                                <a href=""><lightning:icon class="icon-white" iconName="utility:chevrondown" size="x-small" /></a>
+                                <aura:set attribute="else">
+                                    <a href=""><lightning:icon class="icon-white" iconName="utility:chevronright" size="x-small" /></a>
+                                </aura:set>
+                            </aura:if>
+                            <a href="" class="white">&nbsp;Additional Errors</a>
+                        </h3>
+                        <aura:if isTrue="{!v.showAdditional}">
+                            <div style="padding: 5px; padding-left:15px;">
+                                <aura:iteration items="{!v.errors}" var="error" indexVar="index">
+                                    <aura:if isTrue="{!index!=0}">
+                                        <div class="white" style="display: inline-block; font-size: 1.5em; font-weight: 500;">
+                                            {!error.title}
+                                        </div>
+                                        <div class="white">
+                                            {!error.description}
+                                        </div>
+                                    </aura:if>
+                                </aura:iteration>
+                            </div>
+                        </aura:if>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="errorToastFakeLower"/>
+                    </aura:set>
+                </aura:if>
+            </div>
+        </aura:if>
+    </span>
+
+</aura:component>

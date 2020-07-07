@@ -1,0 +1,16 @@
+<aura:component >
+    <aura:attribute name="isDesigner" type="boolean" default="true"/>
+    <aura:attribute name="otherData" type="String" />
+    <aura:attribute name="renderedEleId" type="String" />
+   <!-- <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <lightning:inputRichText value="{!v.myVal}" placeholder="Type something interesting"/>
+    <h1 class="slds-m-top_large slds-text-heading_medium">Output</h1>-->
+    <div aura:id="output" class="draggablesection" id="{!v.renderedEleId}">
+       
+        <div style="{!if(v.isDesigner==true,'height:25px;border-style: dotted;','height:25px;')}">
+ 
+    	</div>
+    </div>
+
+	
+</aura:component>

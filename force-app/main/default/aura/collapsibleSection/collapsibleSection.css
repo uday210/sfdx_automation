@@ -1,0 +1,114 @@
+/**
+ * Created by x213555 on 8/23/19.
+ */
+.THIS.container {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: .25rem;
+    background-color: white;
+}
+
+.THIS.container.link {
+    border: none;
+}
+
+.THIS .row {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+.THIS .row:hover {
+    background-color: #efefef;
+}
+.THIS .row:active{
+    background-color: #dfdfdf;
+}
+
+.THIS .row.link:hover {
+    background-color: white;
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 109, 204);
+}
+.THIS .row.link:active{
+    background-color: white;
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 109, 204);
+}
+
+
+.THIS .rowIcon {
+    flex: 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.THIS .rowIcon.link {
+    padding: 0px 5px;
+}
+
+.THIS .rowIcon .slds-icon{
+    width: 1.5em;
+    height:1.5em;
+}
+
+.THIS .rowIcon.link .slds-icon{
+    width: .85em;
+    height: .85em;
+    fill: rgb(0, 109, 204) !important;
+}
+
+.THIS .rowIcon.opened .slds-icon{
+    transform: rotate(90deg);
+}
+.THIS .rowIcon.opened.animate .slds-icon{
+    animation: openIcon 250ms;
+    animation-timing-function: ease-in-out;
+}
+.THIS .rowIcon.closed .slds-icon{
+    transform: rotate(0deg);
+}
+.THIS .rowIcon.closed.animate .slds-icon{
+    animation: closeIcon 250ms;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes openIcon{
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+@keyframes closeIcon{
+    0% {
+        transform: rotate(90deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.THIS .rowTitle {
+    flex: 1;
+    display: inline-block;
+    padding: 5px;
+    font-size: 1.15em;
+    font-weight: 500;
+}
+
+.THIS .rowTitle.link{
+    font-size: 1em;
+    padding: 0;
+    line-height: 1.75em;
+    color: rgb(0, 109, 204);
+}
+
+.THIS .transitionHeight {
+    transition: height 250ms;
+    transition-timing-function: ease-in-out;
+}
+
+.THIS .contentContainer {
+    padding: 10px;
+}

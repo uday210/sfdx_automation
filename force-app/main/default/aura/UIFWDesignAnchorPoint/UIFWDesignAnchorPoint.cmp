@@ -1,0 +1,43 @@
+<!--
+ - Created by x213555 on 7/9/19.
+ -->
+
+<aura:component description="UIFWDesignAnchorPoint">
+    <aura:attribute name="templateFunction" type="Object" default="{!c.defaultTemplate}"/>
+    <aura:attribute name="items" type="Object"/>
+    <aura:attribute name="index" type="Integer"/>
+    <aura:attribute name="display" type="Boolean" default="true"/>
+    <aura:attribute name="defaultTargeted" type="Boolean" default="true"/>
+    <aura:attribute name="fireRefresh" type="Boolean" default="true"/>
+
+    <aura:attribute name="onDrop" type="Aura.Action"/>
+    <aura:attribute name="bind" type="String"/>
+    <aura:attribute name="param" type="String"/>
+
+    <aura:method name="addItem" action="{!c.addItem}">
+        <aura:attribute name="type" type="String"/>
+        <aura:attribute name="category" type="Object"/>
+    </aura:method>
+    <aura:method name="getJSON" action="{!c.getJSON}">
+        <aura:attribute name="type" type="String"/>
+        <aura:attribute name="category" type="Object"/>
+    </aura:method>
+
+    <aura:registerEvent name="refresh" type="c:RefreshParentEvent"/>
+
+    <c:apexErrorHandler parentCompType="UIFWDesignAnchorPoint" callingComp="{!this}"/>
+    <!--<c:globalStorageBroker callingComp="{!this}"/>-->
+    <c:UIFWDesignTargetHelper aura:id="targetHelper"/>
+    <c:promiseHelper aura:id="promiseHelper"/>
+
+    <aura:if isTrue="{!and(v.display, globalStorage.UIFW_draggedItemType)}">
+        <div class="addBox id-UIFWDesignAnchorPoint-dropLocation" ondragover="{!c.cancel}" ondragenter="{!c.cancel}" ondrop="{!c.addItem}">
+            <div class="icon">
+                <lightning:icon iconName="utility:add" class="icon-lightblue"/>
+            </div>
+            <div style="opacity: 0; pointer-events: none">
+                <lightning:icon iconName="utility:add" class="icon-lightblue"/>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

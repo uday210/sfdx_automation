@@ -1,0 +1,28 @@
+<template>
+    <div style="text-align:right">
+        <br/>
+        <a onclick={downloadascsv}> Download as CSV</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+   <div style="padding:1%">
+    <template for:each={dataRows} for:item='item' for:index="index">
+        <div class="slds-grid slds-gutters" key={item.id}>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input type="text" label="Name" value={item.Name} onchange={dataUpdate} data-index={index} data-field='Name'></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input type="number" label="Age" value={item.Age} data-index={index} data-field='Age' onchange={dataUpdate}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <c-genderpicklist item={index}  ongenderchange={genderdataUpdate}></c-genderpicklist>
+             <!--       <lightning-input type="text" label="Gender" value={item.Gender} data-index={index} data-field='Gender' onchange={dataUpdate}></lightning-input>-->
+                </div>
+            <div class="slds-col slds-size_1-of-4">
+           <!--   <lightning-button variant="brand" label="add" onclick={handleClick}></lightning-button>-->
+<c-adddeletebutton item={index} allrows={dataRows.length} onadd={handleClick} ondelete={handleDelete}></c-adddeletebutton>
+            </div>
+        </div>
+    
+</template>
+ <lightning-button variant="brand" label="get Data" onclick={getData}></lightning-button>
+</div>
+</template>

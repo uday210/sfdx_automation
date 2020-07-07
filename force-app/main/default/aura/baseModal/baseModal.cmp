@@ -1,0 +1,38 @@
+<!--
+ - Created by x213555 on 5/16/19.
+ -->
+
+<aura:component description="baseModal">
+    <aura:attribute name="callingComp" type="Object"/>
+    <aura:attribute name="values" type="Object"/>
+    <aura:attribute name="title" type="String" description='Title of the modal'/>
+    <aura:attribute name="footerButtons" type="Aura.Component[]" description="buttons to be placed in footer"/>
+    <aura:attribute name="isOpen" type="Boolean"/>
+    <aura:attribute name="onOpen" type="Aura.Action"/>
+    <aura:attribute name="onClose" type="Aura.Action"/>
+    <aura:attribute name="large" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <span class="{!v.values.isOpen?'':'slds-hide' }" style="{!v.values.isOpen?'position: fixed; width: 100%; height: 100%; z-index: 9999;':''}">
+        <div class="{!'slds-modal slds-fade-in-open ' + (v.large?'slds-modal--large':'')}">
+            <div class="slds-modal__container">
+                <div style="background-color: white;">
+                    <aura:if isTrue="{!v.title}">
+                        <div class="slds-modal__header" style="font-size: 1.15em; font-weight: 500;">
+                            {!v.title}
+                        </div>
+                    </aura:if>
+                    <div style="padding:10px; position:relative">
+                        {!v.body}
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    {!v.footerButtons}
+                    <lightning:button onclick="{!c.hideModal}" label="Close"/>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-fade-in-open"/>
+    </span>
+</aura:component>

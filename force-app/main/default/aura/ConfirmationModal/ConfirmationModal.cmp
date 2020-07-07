@@ -1,0 +1,43 @@
+<!--
+ - Created by x210643 on 5/17/18.
+ -->
+
+<aura:component description="ConfirmationModal">
+
+    <aura:method name="show" action="{!c.show}" access="PUBLIC"/>
+    <aura:method name="hide" action="{!c.hide}" access="PUBLIC"/>
+
+    <aura:attribute name="function" type="Aura.Action"/>
+    <aura:attribute name="bind" type="String"/>
+    <aura:attribute name="param" type="String"/>
+    <aura:attribute name="title" type="String" default="Confirm"/>
+    <aura:attribute name="content" type="String" default="Are you sure?"/>
+    <aura:attribute name="actionName" type="String" default="Yes"/>
+    <aura:attribute name="running" type="Boolean" default="False"/>
+    <aura:attribute name="promise" type="Object" default=""/>
+
+    <c:promiseHelper aura:id="promiseHelper"/>
+
+
+    <div role="dialog" tabindex="-1" aria-labelledby="dialog-label" aria-modal="true" class="slds-modal" aura:id="modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close button_position" onclick="{!c.hide}" title="Close">
+                    <lightning:icon iconName="utility:close" size="small" class="icon-white" />
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="dialog-label" class="slds-text-heading--medium id-confirmationmodal-title-output-txt">{!v.title}</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium show-whitespace">
+                {!v.content}
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button class="slds-button slds-button--neutral id-confirmationmodal-cancel-button" onclick="{!c.hide}">Cancel</lightning:button>
+                <c:promiseButton class="slds-button slds-button_brand id-confirmation-button id-confirmationmodal-yes-button" onclick="{!c.runFunction}" label="{!v.actionName}" loading="{!v.running}"/>
+
+            </footer>
+        </div>
+    </div>
+    <div aura:id="modal-backdrop" class="slds-backdrop"></div>
+
+</aura:component>

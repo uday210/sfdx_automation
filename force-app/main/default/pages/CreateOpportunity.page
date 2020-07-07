@@ -1,0 +1,43 @@
+<apex:page standardController="Opportunity">
+<apex:slds />
+
+<div class="demo-only" style="height: 640px;">
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+<div class="slds-modal__container">
+<header class="slds-modal__header">
+<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+<svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close" />
+</svg>
+<span class="slds-assistive-text">Close</span>
+</button>
+<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Modal Header</h2>
+</header>
+<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+<p>use new system </p>
+</div>
+<footer class="slds-modal__footer">
+<button class="slds-button slds-button_neutral" onclick="regularflow()">No</button>
+<button class="slds-button slds-button_brand" onclick="openCommunity()">Yes</button>
+</footer>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</div>
+
+<script>
+
+function regularflow(){
+
+    window.open('https://ap4.salesforce.com/006/e?retURL=%2F006%2Fo&RecordType=0126F000001gKZ3&ent=Opportunity',"_self");
+}
+
+function openCommunity(){
+localStorage.setItem("RecordType", "0126F000001gKZ3");
+document.cookie = "key=RecordType;domain=force.com";
+
+    window.open('/servlet/networks/switch?networkId=0DB6F000000WXBk&RecordType=0126F000001gKZ3',"_self");
+}
+
+</script>
+</apex:page>

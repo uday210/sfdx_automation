@@ -1,0 +1,33 @@
+<!--
+ - Created by x213555 on 6/3/19.
+ -->
+
+<aura:component description="UIFWDesignAttributeEditor">
+    <aura:attribute name="uifwComponentsLoaded" type="Boolean"/>
+<!--
+    <aura:handler event="c:UIFWDesignFieldDeletionEvent" name="delete" action="{!c.deleteTargeted}"/>
+    <aura:handler event="c:UIFWDesignItemUpdateEvent" name="update" action="{!c.updateTargeted}"/>
+    <aura:handler event="c:UIFWDesignVariableLoadEvent" name="load" action="{!c.retrieveScopedVariablesForTarget}"/>
+-->
+    <aura:attribute name="componentJSON" type="Object"/>
+   <!-- <c:globalStorageBroker callingComp="{!this}"/>-->
+    <ltng:require scripts="{!$Resource.uifwComponents}" afterScriptsLoaded="{!c.onLoad}"/>
+
+    <aura:if isTrue="{!v.uifwComponentsLoaded}">
+        <aura:if isTrue="{!globalStorage.showUIFWDesignAttributeEditor}">
+           <!-- <c:sidebar>
+                <aura:if isTrue="{!!globalStorage.uifwForceSidebarRecalc}">
+                    <aura:iteration items="{!v.componentJSON.items}" var="item">
+                        <c:UIFWDesignItemEditor item="{!item}"/>
+                    </aura:iteration>
+                </aura:if>
+               <c:assignmentHelper value="{!globalStorage.sidebarHasShown}" to="{!true}"/>
+            </c:sidebar>-->
+            <aura:set attribute="else">
+                <aura:if isTrue="{!globalStorage.sidebarHasShown}">
+              <!--      <c:sidebarOutro/>-->
+                </aura:if>
+            </aura:set>
+        </aura:if>
+    </aura:if>
+</aura:component>

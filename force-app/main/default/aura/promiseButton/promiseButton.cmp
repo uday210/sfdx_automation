@@ -1,0 +1,17 @@
+<aura:component description="promiseButton">
+    <aura:attribute name="onclick" type="Aura.Action" description="The function to be called when the button is clicked. If the function returns a promise, the button will self-disable and wait for the function's completion automatically."/>
+    <aura:attribute name="label" type="String" description="The text contained inside of the button"/>
+    <aura:attribute name="class" type="String" description="Classes to be applied to the button"/>
+    <aura:attribute name="loading" type="Boolean" description="Can be set to true/false to manually control the button's spinner/disabled state. Should be left blank if using an onclick function that returns a promise."/>
+    <aura:attribute name="autoLoading" type="Boolean" description="An internal variable that controls the spinner when it is not being set manually."/>
+    <aura:attribute name="disabled" type="Boolean" default="false" description="Whether or not the button is currently disabled, has no impact on the spinner."/>
+    <aura:attribute name="variant" type="String" default="brand" description="The button variant. Supports 'neutral', 'brand', and 'destructive'."/>
+    <aura:attribute name="iconName" type="String" description="Icon to be displayed on the button"/>
+
+    <lightning:button label="{!v.label}"  iconName="{!v.iconName}" variant="{!v.variant}" onclick="{!c.onclick}" class="{!'rounded nowrap '+v.class}" disabled="{!or(v.loading, or(v.disabled, v.autoLoading))}">
+        {!v.label}
+        <aura:if isTrue="{!or(v.loading,v.autoLoading)}">
+            <lightning:spinner aura:id="promiseButtonSpinner" variant="{!v.variant}" size="small"/>
+        </aura:if>
+    </lightning:button>
+</aura:component>

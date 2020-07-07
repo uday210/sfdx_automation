@@ -1,0 +1,35 @@
+<!--
+ - Created by x213555 on 7/10/19.
+ -->
+
+<aura:component description="UIFWDesignItemRenderer">
+    <aura:attribute name="item" type="Object"/>
+    <aura:attribute name="default" type="Boolean" default="true"/>
+
+  <div style="margin: 2px; flex:1;">
+        <!--Example Code for adding a new section type-->
+        <!--<aura:if isTrue="{!v.field.type=='dummy'}">-->
+        <!--    A different value type-->
+        <!--    <c:assignmentHelper value="{!v.default}" to="{!false}" resetListener="{!v.item}" resetValue="{!true}"/>-->
+        <!--</aura:if>-->
+        <aura:if isTrue="{!v.item.type=='Card'}">
+            <c:UIFWDesignCard item="{!v.item}"/>
+       <!--     <c:assignmentHelper value="{!v.default}" to="{!false}" resetListener="{!v.item}" resetValue="{!true}"/>-->
+        </aura:if>
+        <aura:if isTrue="{!v.item.type=='VerticalNavigation'}">
+            <c:UIFWDesignVerticalNav item="{!v.item}"/>
+         <!--   <c:assignmentHelper value="{!v.default}" to="{!false}" resetListener="{!v.item}" resetValue="{!true}"/>-->
+        </aura:if>
+        <aura:if isTrue="{!v.item.type=='VerticalTab'}">
+            <c:UIFWDesignVerticalTab item="{!v.item}"/>
+         <!--   <c:assignmentHelper value="{!v.default}" to="{!false}" resetListener="{!v.item}" resetValue="{!true}"/>
+-->        
+</aura:if>
+        <aura:if isTrue="{!v.item.type=='gridLayout'}">
+            <c:UIFWDesignGrid item="{!v.item}"/>
+   <!--         <c:assignmentHelper value="{!v.default}" to="{!false}" resetListener="{!v.item}" resetValue="{!true}"/>
+-->       
+ </aura:if>
+    </div>
+  
+</aura:component>

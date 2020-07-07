@@ -1,0 +1,16 @@
+<template>
+    HELLO FORM
+    <!-- <div lwc:dom="manual"></div>-->
+
+    <div class="slds-form-element">
+        <template for:each={fieldsData} for:item='eachField' for:index="index">
+
+            <div key={eachField.id}>
+
+                <c-form-field-creator fielddetails={eachField} ondatapopulated={datafromfield}></c-form-field-creator>
+            </div>
+        </template>
+        <button onclick={sayhello} class="btn btn-default">Submit</button>
+  
+    </div>
+</template>

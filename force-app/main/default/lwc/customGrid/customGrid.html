@@ -1,0 +1,19 @@
+<template>
+        <lightning-input type="number" name="input1" label="Enter a rows" value={rows}></lightning-input>
+        <lightning-input type="number" name="input1" label="Enter a columns" value={columns}></lightning-input>
+        <lightning-card>
+            <template for:each={rowsArray} for:item='item'>
+                    <div class="slds-grid " key={item.id}>
+                            <template for:each={columnsArray} for:item='itemRow'>
+                                    <div onmouseover={onhoverofapp}  class="slds-col1" key={itemRow.id} style="border:1px solid black;width:50px;height:50px">
+                                        <div >
+
+                                            GRID 
+                                        </div>
+                                        </div>
+                                </template>
+                   </div> 
+                </template>
+        
+            </lightning-card>
+</template>

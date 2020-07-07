@@ -1,0 +1,48 @@
+/**
+ * Created by x213555 on 6/18/19.
+ */
+.THIS .wrapper{
+    padding:6px;
+    position: relative;
+}
+.THIS .wrapperInternal{
+    position:absolute;
+    z-index:0;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    border: 1px solid transparent;
+    border-radius: .25rem .25rem .25rem .25rem;
+}
+.THIS .title-row.targeted ~ .wrapperInternal{
+    border-color: darkblue;
+}
+.THIS .title-row:not(.targeted):hover ~ .wrapperInternal{
+    border-color: cornflowerblue;
+}
+.THIS.cardBorder{
+    padding: 5px;
+}
+.THIS .forward{
+    position: relative;
+    z-index:1;
+    background-color: rgba(0,0,0,0) !important;
+}
+.THIS .title-row{
+    display: flex;
+    padding: 5px;
+    cursor: pointer;
+}
+.THIS .title-row:hover .wrapper{
+
+}
+.THIS .item {
+    flex:0;
+}
+.THIS .spacer{
+    flex:1;
+}
+.THIS .slds-icon-standard-account{
+    background: white;
+}

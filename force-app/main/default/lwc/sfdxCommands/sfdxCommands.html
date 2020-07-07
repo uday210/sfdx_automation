@@ -1,0 +1,19 @@
+<template>
+    Hello :
+    <lightning-accordion class="example-accordion"
+    >
+    <template for:each={commandsList} for:item='item'>
+            <lightning-accordion-section  key={item.Name} name={item.Name} label={item.Name}>
+                  
+                    <template for:each={item.Commands} for:item='eachCommand'>
+                            
+                            <div  key={eachCommand.Name} class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                                    {eachCommand}
+
+                            </div>
+                    </template>
+            </lightning-accordion-section>
+     
+    </template>
+    </lightning-accordion>
+</template>

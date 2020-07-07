@@ -1,0 +1,35 @@
+<!--
+ - Created by x213555 on 8/27/19.
+ -->
+
+<aura:component description="UIFWDesignDataSources">
+    <aura:attribute name="dataSources" type="Object"/>
+    <aura:attribute name="flicker" type="Boolean" default="{!true}"/>
+
+    <aura:if isTrue="{!v.flicker}">
+        <aura:if isTrue="{!or(!v.dataSources, !v.dataSources.length)}">
+            <c:UIFWDesignInformativeText>
+                Template currently has no data sources configured
+            </c:UIFWDesignInformativeText>
+            <aura:set attribute="else">
+                <aura:iteration var="dataSource"
+                                indexVar="index"
+                                items="{!v.dataSources}">
+                    <aura:if isTrue="{!dataSource}">
+                        <div class="flexRow">
+                            <c:UIFWDesignDataSource item="{!dataSource}"/>
+                            <div class="flexItemEnd" onclick="{!c.deleteSource}" data-value="{!index}">
+                                <lightning:buttonIcon alternativeText="delete" iconName="utility:delete" variant="border-filled"/>
+                            </div>
+                        </div>
+                    </aura:if>
+                </aura:iteration>
+            </aura:set>
+        </aura:if>
+        <div class="expandRow">
+            <div class="bar"/>
+                <lightning:button label="Add New Data Source" iconName="utility:add" onclick="{!c.addDataSource}"/>
+            <div class="bar"/>
+        </div>
+    </aura:if>
+</aura:component>

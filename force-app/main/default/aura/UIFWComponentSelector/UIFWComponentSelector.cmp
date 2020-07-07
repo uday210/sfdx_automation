@@ -1,0 +1,43 @@
+<!--
+ - Created by x213555 on 5/15/19.
+ -->
+
+<aura:component description="UIFWComponentSelector">
+    <aura:attribute name="entries" type="Object"/>
+    <aura:attribute name="filteredEntries" type="Object"/>
+    <aura:attribute name="filter" type="String"/>
+    <aura:attribute name="test" type="String" default="A test string"/>
+
+    <ltng:require scripts="{!$Resource.uifwComponents}" afterScriptsLoaded="{!c.onInit}"/>
+
+  <!--  <c:globalStorageBroker callingComp="{!this}"/>-->
+
+    <div class="wrapper">
+        <div class="box">
+            <lightning:input type="text"
+                             value="{!v.filter}"
+                             placeholder="Search..."
+                             onchange="{!c.updateFilter}"
+                             class="hide-label"/>
+            <aura:iteration items="{!v.filteredEntries}" var="entry">
+                <aura:if isTrue="{!entry.types.length}">
+                    <div class="slds-p-top_x-small">
+                        <b>{!entry.menuLabel}:</b>
+                    </div>
+                    <aura:iteration items="{!entry.types}" var="type" indexVar="index">
+                        <div class="sectionEntry id-UIFWComponentSelector-draggable"
+                             draggable="true"
+                             ondragstart="{!c.startDrag}"
+                             ondragend="{!c.endDrag}"
+                             data-type="{!type.type}"
+                             data-section="{!type.category}">
+                            <span class="slds-p-left_x-large">
+                                <c:UIFWDesignIcon type="{!type.type}" showLabel="true"/>
+                            </span>
+                        </div>
+                    </aura:iteration>
+                </aura:if>
+            </aura:iteration>
+        </div>
+    </div>
+</aura:component>

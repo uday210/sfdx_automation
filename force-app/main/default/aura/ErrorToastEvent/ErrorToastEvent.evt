@@ -1,0 +1,8 @@
+<!--
+ - Created by x213555 on 4/10/18.
+ -->
+
+<aura:event type="APPLICATION" description="ErrorToastEvent">
+        <aura:attribute name="error" type="String"/>
+        <aura:attribute name="targetId" type="String"/>
+</aura:event>

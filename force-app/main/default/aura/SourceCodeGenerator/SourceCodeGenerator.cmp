@@ -1,0 +1,6 @@
+<aura:component implements="force:appHostable" description="SourceCodeGenerator" controller="GetComponentMetadata">
+    <aura:attribute name="htmlCodeis" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
+    {!v.htmlCodeis}
+    <aura:unescapedHtml value="{!v.htmlCodeis}"/>
+</aura:component>

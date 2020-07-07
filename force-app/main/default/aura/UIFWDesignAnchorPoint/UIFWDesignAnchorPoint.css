@@ -1,0 +1,20 @@
+/**
+ * Created by x213555 on 7/9/19.
+ */
+.THIS.addBox{
+    flex:1;
+    background-color: rgb(229, 241, 252);
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid rgb(0, 110, 217);
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    position: relative;
+}
+.THIS .icon{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

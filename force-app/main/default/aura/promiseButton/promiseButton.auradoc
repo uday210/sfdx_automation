@@ -1,0 +1,15 @@
+<!--
+ - Created by x213555 on 8/3/18.
+ -->
+
+<aura:documentation>
+	<aura:description>
+		<h1>Documentation for promiseButton:</h1>
+		<p>Used to provide a button that self-disables until the function it calls completes.</p>
+		<p>Should be used when a button is calling a function that has some callback in it.</p>
+		<p>promiseButton is built on top of lightning:button</p>
+	</aura:description>
+	<aura:example name="promiseButtonExample" ref="c:promiseButtonExample" label="Using promiseButton">
+		Examples of a variety of promiseButtons
+	</aura:example>
+</aura:documentation>

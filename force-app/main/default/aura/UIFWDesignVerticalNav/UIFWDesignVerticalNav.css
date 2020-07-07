@@ -1,0 +1,102 @@
+/**
+ * Created by x213555 on 6/26/19.
+ */
+.THIS .flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: stretch;
+    position: relative;
+}
+.THIS .flex-item1{
+    flex: 0;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+}
+.THIS .flex-item4{
+    padding-left: 8px;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+}
+.THIS .overhang{
+    overflow: hidden;
+    width: 100%;
+    background-color: white;
+    top: 0;
+    right: -9px;
+    position: absolute;
+    z-index:1;
+    pointer-events: none;
+    color: transparent;
+    box-shadow: 3px 0px 0 -1px white;
+}
+.THIS .overhang.hovered{
+    border-top: 1px solid cornflowerblue;
+    border-bottom: 1px solid cornflowerblue;
+}
+.THIS .overhang.selected{
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
+}
+.THIS .wrapper{
+    padding: 5px;
+    border-radius: .25rem .25rem .25rem .25rem;
+    height: 100%;
+    width: 100%;
+    border: 1px solid transparent;
+    margin: 0;
+}
+.THIS .wrapper.selected{
+    border-color: darkblue;
+}
+.THIS .wrapper.hovered{
+    border-color: cornflowerblue;
+}
+.THIS .squareTopLeftCorner{
+    border-top-left-radius: 0 !important;
+}
+.THIS .slds-nav-vertical__item.slds-is-active.hovered > .slds-nav-vertical__action{
+     border-top: 1px solid cornflowerblue;
+     border-bottom: 1px solid cornflowerblue;
+}
+.THIS .slds-nav-vertical__item.slds-is-active.selected > .slds-nav-vertical__action {
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
+    font-weight: bold;
+    box-shadow: inset 0.25rem 0 0 darkblue;
+}
+.THIS .slds-nav-vertical__item.slds-is-active.selected:before {
+    background-color: rgba(0, 2, 139, .1);
+}
+/**
+ * Created by x213555 on 7/11/19.
+ */
+.THIS.borderLocation{
+    position: relative;
+}
+.THIS .hoverable {
+    cursor: pointer;
+}
+.THIS .hoverable:hover ~ .border{
+    border-color: cornflowerblue;
+}
+.THIS .border{
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: .25rem .25rem .25rem .25rem;
+    border: 1px solid #e7e7e7;
+}
+.THIS .hoverable.targeted ~ .border{
+    border-color: darkblue !important;
+}
+.THIS .forward{
+    position: relative;
+    z-index: 2;
+}

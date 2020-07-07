@@ -1,0 +1,14 @@
+<!--
+ - Created by x213555 on 5/24/19.
+ -->
+
+<aura:component description="UIFWComponentBuilderModal">
+    <aura:attribute name="componentJSON" type="Object"/>
+    <aura:registerEvent name="refresh" type="c:RefreshParentEvent"/>
+
+    <c:baseModal callingComp="{!this}" onClose="{!c.propChanges}" title="Edit Template">
+        <lightning:input value="{!v.componentJSON.name}" label="Name"/>
+        <lightning:input value="{!v.componentJSON.dataSourceType}" label="dataSourceType"/>
+        <lightning:input value="{!v.componentJSON.dataSourceName}" label="dataSourceName"/>
+    </c:baseModal>
+</aura:component>

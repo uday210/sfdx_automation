@@ -1,0 +1,130 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" lightningStylesheets="true">
+  
+<html>
+<head>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous"/>
+<link href="https://mydealreg-dev-ed.lightning.force.com/resource/1535193879000/flow/flow/jquery.flowchart.css" rel="stylesheet" type="text/css"/>
+<style>
+body { background-color:#fafafa;}
+.container { margin:150px auto;}
+.demo {
+  height: 300px;
+  margin-bottom: 10px;
+}
+.flowchart-operator{
+position: relative;
+    padding: 0;
+    background: white;
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    background-clip: padding-box;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}	
+    
+    .flowchart-operator {
+    position: absolute;
+    width: 251px;
+    border: 1px solid #CCCCCC;
+    background: #FAFAFA;
+    pointer-events: initial;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="demo" id="example"></div>
+<button class="btn btn-primary" id="create_operator">Create A New Operator</button>
+<button class="btn btn-danger" id="delete_selected_button">Delete Selected Operator</button>
+    <button class="btn btn-primary" id="showdata">
+        showdata
+    </button>
+</div>
+<script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<c:myflow />
+<script type="text/javascript">
+  var $flowchart; 
+  $(document).ready(function() {
+    var data = {
+      operators: {
+        RecordType: {
+          top: 20,
+          left: 20,
+          properties: {
+            title: 'Record Type selection',
+            inputs: {},
+            outputs: {
+              output_1: {
+                label: 'Next',
+              }
+            }
+          }
+        },
+        Endcustomer: {
+          top: 80,
+          left: 300,
+          properties: {
+            title: 'End customer selection',
+            inputs: {
+              input_1: {
+                label: 'start',
+              }
+             
+            },
+            outputs: {
+            	  output_1: {
+                label: 'Next',
+              }
+
+            }
+          }
+        },
+      }
+    };
+  $flowchart = $('#example');
+    // Apply the plugin on a standard, empty div...
+   $flowchart.flowchart({
+      data: data
+    });
+  });
+  var operatorI = 0;
+    $('#create_operator').click(function() {
+      var operatorId = 'created_operator_' + operatorI;
+      var operatorData = {
+        top: 60,
+        left: 500,
+        properties: {
+          title: 'Operator ' + (operatorI + 3),
+          inputs: {
+            input_1: {
+              label: 'Input 1',
+            }
+          },
+          outputs: {
+            output_1: {
+              label: 'Output 1',
+            }
+          }
+        }
+      };
+
+      operatorI++;
+
+      $('#example').flowchart('createOperator', operatorId, operatorData);
+    });
+
+    $('#delete_selected_button').click(function() {
+      $('#example').flowchart('deleteSelected');
+    });
+   $('#showdata').click(function() {
+      var data = $flowchart.flowchart('getData');
+       console.log(data);
+       // $('#flowchart_data').val(JSON.stringify(data, null, 2));
+    });
+</script>
+</body>
+</html>
+
+</apex:page>
