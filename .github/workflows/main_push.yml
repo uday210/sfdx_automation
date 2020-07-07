@@ -22,4 +22,4 @@ jobs:
       - name: List orgs
         run: 'sfdx force:org:list'
       - name: Deploy source
-        run: 'sfdx force:source:deploy -u uday_sfdc@dealreg.com '
+        run: 'sfdx force:source:deploy --manifest /manifest/package.xml -u uday_sfdc@dealreg.com '
