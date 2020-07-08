@@ -22,6 +22,6 @@ jobs:
       - name: List orgs
         run: 'sfdx force:org:list'
       - name: sfdx-test-run
-        run: 'sfdx force:apex:test:run -l RunLocalTests -w 30'	
+        run: 'sfdx force:apex:test:run -l RunLocalTests -w 30 -u uday_sfdc@dealreg.com'	
       - name: Deploy source
         run: 'sfdx force:source:deploy --manifest manifest/package.xml -u uday_sfdc@dealreg.com '
